@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* File: /styles/globals.css */
+body {
+  font-family: system-ui, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #c4c4c4;
+  border-radius: 3px;
+}
