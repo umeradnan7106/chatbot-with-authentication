@@ -5,15 +5,15 @@ import * as z from "zod";
 
 // Define a schema for input validation
 const UserSchema = z
-  .object({
-    username: z.string().min(1, 'Username is required').max(100),
-    email: z.string().min(1, 'Email is required').email('Invalid email'),
-    password: z
-      .string()
-      .min(1, 'Password is required')
-      .min(8, 'Password must have than 8 characters'),
-  })
-  
+    .object({
+        username: z.string().min(1, 'Username is required').max(100),
+        email: z.string().min(1, 'Email is required').email('Invalid email'),
+        password: z
+            .string()
+            .min(1, 'Password is required')
+            .min(8, 'Password must have than 8 characters'),
+    })
+
 
 export async function POST(req: Request) {
     try {
@@ -52,13 +52,14 @@ export async function POST(req: Request) {
                 password: hashedPassword,
             }
         })
-        const { password: newUserPassword, ...rest} = newUser;
+        const { password: newUserPassword, ...rest } = newUser;
 
         return NextResponse.json({ user: rest, message: "User created successfully" },
             { status: 201 }
         )
 
-    } catch (error) { 
-        return NextResponse.json({message: "Something went wrong"}, { status: 500 });
+    } catch (error) {
+        console.error("[REGISTER_ERROR]", error);
+        return NextResponse.json({ message: "Something went wrong" }, { status: 500 });
     }
 }

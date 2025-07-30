@@ -1,3 +1,4 @@
+// src/app/(dashboard)/admin/page.tsx
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
