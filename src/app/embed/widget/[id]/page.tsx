@@ -13,7 +13,7 @@ export default function EmbeddedChatbotPage() {
       <div className="bg-blue-600 text-white p-2 text-center font-semibold">
         Chatbot for: {id}
       </div>
-      <ChatbotClientWrapper />
+      <ChatbotClientWrapper chatbotId={id as string}/>
     </div>
   )
 }
