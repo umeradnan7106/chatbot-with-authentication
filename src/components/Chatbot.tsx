@@ -91,7 +91,7 @@ export default function Chatbot() {
 
       {/* Chatbox */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[95%] max-w-sm h-[66vh] bg-white shadow-2xl rounded-xl flex flex-col z-40">
+        <div className="fixed bottom-6 right-6 w-[95%] max-w-sm h-[66vh] bg-white shadow-2xl rounded-xl flex flex-col z-50">
           {/* Header */}
           <div className="bg-black text-white px-4 py-3 font-semibold flex justify-between items-center rounded-t-xl">
             <span>ChatBot Assistant</span>
