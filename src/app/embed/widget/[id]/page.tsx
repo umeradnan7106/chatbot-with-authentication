@@ -10,7 +10,6 @@ export default function EmbeddedChatbotPage() {
 
   return (
     <div>
-      
       <ChatbotClientWrapper chatbotId={id as string} />
     </div>
   );

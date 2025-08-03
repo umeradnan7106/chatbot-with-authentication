@@ -66,7 +66,7 @@ export async function POST(req: Request) {
         {
           role: "system",
           content:
-            "You are a helpful, friendly assistant for a company website. Reply in short, clear sentences. Avoid lengthy or overly formal responses. Keep answers under 70 words.",
+            "You are a helpful, friendly assistant for a company website. Reply in short, clear sentences. Avoid lengthy or overly formal responses.",
         },
         {
           role: "user",
