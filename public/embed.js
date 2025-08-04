@@ -1,25 +1,37 @@
-// public/embed.js
-
 (function () {
-  // Check if already injected
-  if (document.getElementById("custom-chatbot-iframe")) return;
+  // Create chatbot button
+  const chatButton = document.createElement("button");
+  chatButton.innerHTML = "💬";
+  chatButton.id = "custom-chatbot-btn";
+  chatButton.style.position = "fixed";
+  chatButton.style.bottom = "20px";
+  chatButton.style.right = "20px";
+  chatButton.style.zIndex = "9999";
+  chatButton.style.borderRadius = "50%";
+  chatButton.style.padding = "15px";
+  chatButton.style.border = "none";
+  chatButton.style.background = "#007bff";
+  chatButton.style.color = "#fff";
+  chatButton.style.fontSize = "24px";
+  chatButton.style.cursor = "pointer";
+  document.body.appendChild(chatButton);
 
-  // Create iframe
+  // Create iframe container
   const iframe = document.createElement("iframe");
   iframe.src = "https://chatbot-with-authentication.vercel.app/chat";
-  iframe.id = "custom-chatbot-iframe";
-
-  // Style the iframe (bottom right corner floating)
   iframe.style.position = "fixed";
-  iframe.style.bottom = "20px";
+  iframe.style.bottom = "80px";
   iframe.style.right = "20px";
-  iframe.style.width = "350px";
+  iframe.style.width = "360px";
   iframe.style.height = "500px";
-  iframe.style.border = "none";
-  iframe.style.borderRadius = "12px";
-  iframe.style.zIndex = "9999";
-  iframe.style.boxShadow = "0 4px 20px rgba(0,0,0,0.2)";
-
-  // Append iframe to body
+  iframe.style.border = "1px solid #ccc";
+  iframe.style.borderRadius = "10px";
+  iframe.style.zIndex = "9998";
+  iframe.style.display = "none";
   document.body.appendChild(iframe);
+
+  // Toggle chatbot
+  chatButton.addEventListener("click", () => {
+    iframe.style.display = iframe.style.display === "none" ? "block" : "none";
+  });
 })();
