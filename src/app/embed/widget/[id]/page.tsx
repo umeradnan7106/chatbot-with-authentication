@@ -1,16 +1,9 @@
-// src/app/embed/widget/[id]/page.tsx
-
 "use client";
-
 import { useParams } from "next/navigation";
 import ChatbotClientWrapper from "@/components/ChatbotClientWrapper";
 
-export default function EmbeddedChatbotPage() {
+export default function Page() {
   const { id } = useParams();
 
-  return (
-    <div>
-      <ChatbotClientWrapper chatbotId={id as string} />
-    </div>
-  );
+  return <ChatbotClientWrapper chatbotId={id as string} />;
 }

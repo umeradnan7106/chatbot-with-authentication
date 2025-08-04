@@ -1,4 +1,3 @@
-// src/components/ChatbotClientWrapper.tsx
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
@@ -33,9 +32,10 @@ export default function ChatbotClientWrapper({ chatbotId }: Props) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
+  // 🚀 Handle message send
   const sendMessage = async (textToSend?: string) => {
-    const message = textToSend ?? input
-    if (!message.trim() || !chatbotId) return
+    const message = textToSend ?? input.trim()
+    if (!message || !chatbotId) return
 
     const userMessage: Message = { from: 'user', text: message }
     setMessages((prev) => [...prev, userMessage])
@@ -54,7 +54,6 @@ export default function ChatbotClientWrapper({ chatbotId }: Props) {
         from: 'bot',
         text: data.reply ?? '🤖 Sorry, no response received.',
       }
-
       setMessages((prev) => [...prev, botMessage])
     } catch {
       setMessages((prev) => [
@@ -66,73 +65,73 @@ export default function ChatbotClientWrapper({ chatbotId }: Props) {
     }
   }
 
+  // 🚀 Handle Enter key send
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') sendMessage()
   }
 
+  // 😄 Emoji selection handler
   const onEmojiClick = (emojiData: EmojiClickData) => {
     setInput((prev) => prev + emojiData.emoji)
     setShowEmojiPicker(false)
   }
 
+  // 🔽 Auto-scroll on new message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   return (
     <>
-      {/* Floating Button */}
-       <button
+      {/* 💬 Floating Chat Button */}
+      <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 bg-black text-white p-4 rounded-full shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer"
+        className="fixed bottom-6 right-6 z-50 bg-black text-white p-4 rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
       >
         💬
       </button>
 
-      {/* Chatbox */}
+      {/* 🪟 Chatbox Modal */}
       {isOpen && (
         <div className="fixed bottom-[90px] right-6 w-[95%] max-w-sm h-[66vh] bg-white shadow-2xl rounded-xl flex flex-col z-50">
-          {/* Header */}
+
+          {/* 🧠 Header */}
           <div className="bg-black text-white px-4 py-3 font-semibold flex justify-between items-center rounded-t-xl">
             <span>ChatBot Assistant</span>
-            <button className='cursor-pointer' onClick={() => setIsOpen(false)}>✖</button>
+            <button onClick={() => setIsOpen(false)}>✖</button>
           </div>
 
-          {/* Chat Area */}
+          {/* 💬 Chat Area */}
           <div className="flex-1 overflow-y-auto p-3 bg-gray-100 space-y-2">
-            {/* Suggested */}
+
+            {/* 📝 Suggested Questions */}
             <div className="mb-2 flex flex-wrap gap-2">
               {suggestedQuestions.map((question, index) => (
                 <button
                   key={index}
-                  className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
                   onClick={() => sendMessage(question)}
                   disabled={isLoading}
+                  className="text-xs bg-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 transition"
                 >
                   {question}
                 </button>
               ))}
             </div>
 
-            {/* Messages */}
+            {/* 📥 Messages */}
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`rounded-lg px-4 py-2 max-w-[75%] whitespace-pre-line text-sm ${
-                    msg.from === 'user'
-                      ? 'bg-black text-white'
-                      : 'bg-white text-black border'
-                  }`}
-                >
+              <div key={i} className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`rounded-lg px-4 py-2 max-w-[75%] whitespace-pre-line text-sm ${
+                  msg.from === 'user'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black border'
+                }`}>
                   {msg.text}
                 </div>
               </div>
             ))}
 
-            {/* Typing */}
+            {/* ✍️ Typing indicator */}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white text-black border px-4 py-2 rounded-lg text-sm">
@@ -144,31 +143,32 @@ export default function ChatbotClientWrapper({ chatbotId }: Props) {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Section */}
+          {/* 🔤 Input Section */}
           <div className="border-t p-3 flex items-center gap-2 relative">
-            <button
-              onClick={() => setShowEmojiPicker((prev) => !prev)}
-              className="text-xl"
-            >
+            {/* 😊 Emoji Button */}
+            <button onClick={() => setShowEmojiPicker((prev) => !prev)} className="text-xl">
               😊
             </button>
 
+            {/* Emoji Picker UI */}
             {showEmojiPicker && (
               <div className="absolute bottom-14 left-0 z-50">
                 <EmojiPicker onEmojiClick={onEmojiClick} />
               </div>
             )}
 
+            {/* Input Field */}
             <input
               type="text"
               placeholder="Type your message..."
-              className="flex-1 p-2 text-sm border rounded-md"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
+              className="flex-1 p-2 text-sm border rounded-md"
             />
 
+            {/* Send Button */}
             <button
               onClick={() => sendMessage()}
               disabled={isLoading}
