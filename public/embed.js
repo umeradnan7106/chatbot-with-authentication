@@ -18,7 +18,7 @@
 
   // Create iframe container
   const iframe = document.createElement("iframe");
-  iframe.src = "https://chatbot-with-authentication.vercel.app/chat";
+  iframe.src = "https://chatbot-intigration.vercel.app/chat";
   iframe.style.position = "fixed";
   iframe.style.bottom = "80px";
   iframe.style.right = "20px";
